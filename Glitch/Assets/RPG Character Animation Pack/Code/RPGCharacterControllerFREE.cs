@@ -2,11 +2,7 @@
 using System.Collections;
 using System.Runtime.InteropServices;
 
-public enum Weapon 
-{
-	UNARMED = 0,
-	RELAX = 8
-}
+
 	
 public class RPGCharacterControllerFREE : MonoBehaviour 
 {
