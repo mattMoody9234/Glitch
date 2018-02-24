@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BugsScript : MonoBehaviour {
     public GameObject player;
@@ -22,9 +23,11 @@ public class BugsScript : MonoBehaviour {
             isFall = true;
             
             curError = Instantiate(errorMessage);
-            ErrorMessage error = curError.GetComponent<ErrorMessage>();
-            
+            ErrorMessage error = curError.GetComponentInChildren<ErrorMessage>();
+            error.errorMessage.text = "fuck yeah";
             error.player = player;
+
+
 
 
         }

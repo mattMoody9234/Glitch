@@ -7,7 +7,7 @@ public class ErrorMessage : MonoBehaviour {
     public GameObject debugCanvas;
     public GameObject player;
     public Vector3 playerPos;
-    
+    public Text errorMessage;
     // Use this for initialization
     void Start () {
 		

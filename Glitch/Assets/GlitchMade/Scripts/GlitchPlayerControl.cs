@@ -42,7 +42,6 @@ public class GlitchPlayerControl : MonoBehaviour
             animator.SetTrigger("Jump");
            // rb.AddForce(transform.up +* 1300 .0f);
             transform.Translate(0, Input.GetAxis("Vertical")  + 2.0f,0.0f);
-            Debug.Log("got it");
         }
 
         //get buttons up
@@ -66,13 +65,11 @@ public class GlitchPlayerControl : MonoBehaviour
         if (isHMoving == true)
         {
             transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * 10.0f,0,0);
-            Debug.Log("yee");
         }
         //move forward or backward
         if (isVMoving == true)
         {
             transform.Translate(0, 0, Input.GetAxis("Vertical") * Time.deltaTime * 10.0f);
-            Debug.Log("noice");
         }
 
 
