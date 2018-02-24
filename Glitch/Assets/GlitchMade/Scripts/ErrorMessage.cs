@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class ErrorMessage : MonoBehaviour {
     public GameObject debugCanvas;
-    public GameObject player;
-    public Vector3 playerPos;
     public Text errorMessage;
+
+    public BugsScript gameManager;
+
     // Use this for initialization
     void Start () {
-		
+       
 	}
 	
 	// Update is called once per frame
@@ -26,6 +27,7 @@ public class ErrorMessage : MonoBehaviour {
 
     void resetCharacter()
     {
-        player.transform.position = playerPos;
+        gameManager.player.transform.position = gameManager.playerPos;
+        gameManager.isFall = false;
     }
 }

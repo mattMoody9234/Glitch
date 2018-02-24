@@ -10,7 +10,7 @@ public class BugsScript : MonoBehaviour {
     public GameObject errorMessage;
 
     GameObject curError;
-    private bool isFall;
+    public bool isFall;
 	// Use this for initialization
 	void Start () {
         isFall = false;
@@ -23,21 +23,30 @@ public class BugsScript : MonoBehaviour {
             isFall = true;
             
             curError = Instantiate(errorMessage);
-            ErrorMessage error = curError.GetComponentInChildren<ErrorMessage>();
-            error.errorMessage.text = "fuck yeah";
-            error.player = player;
 
-
-
-
+            ErrorMessage fallError = instantiatePopUp();
+            fallError.errorMessage.text = "You fell my man";
         }
     }
 
-    void LateUpdate()
+    void OnTriggerEnter(Collider collider)
     {
-        
+        if (collider.name == "Bug Floor")
+        {
+            ErrorMessage missingFloor = instantiatePopUp();
+            missingFloor.errorMessage.text = "floor not scripted, please return for updates";
+            
+        }
+    }
+
+    ErrorMessage instantiatePopUp()
+    {
+        ErrorMessage error = curError.GetComponentInChildren<ErrorMessage>();
+        error.gameManager = this;
+
+        return error;
     }
 
 
-    
+
 }
