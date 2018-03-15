@@ -13,6 +13,10 @@ public class GlitchPlayerControl : MonoBehaviour
     bool isVMoving;
     bool isJumping;
 
+    float prevMousePosY;
+
+    bool camRot;
+
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -20,6 +24,9 @@ public class GlitchPlayerControl : MonoBehaviour
         isHMoving = false;
         isVMoving = false;
         isJumping = false;
+
+        prevMousePosY = Input.mousePosition.y;
+        camRot = false;
     }
 
 
@@ -74,5 +81,32 @@ public class GlitchPlayerControl : MonoBehaviour
 
 
     }
+    void LateUpdate()
+    {
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            camRot = true;
+            Debug.Log("Down");
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            camRot = false;
+        }
+        if (camRot == true)
+        {
+            Debug.Log("One Down");
+
+            //  if (transform.rotation.y >= 90.0f && transform.rotation.y <= 180.0f)
+            //  {
+            float rotY = Input.mousePosition.y - prevMousePosY;
+            Vector3 rotateMe = new Vector3(0.0f, rotY, 0.0f);
+            transform.Rotate(rotateMe);
+
+
+            //  }
+
+        }
+        prevMousePosY = Input.mousePosition.y;
+    }
 }

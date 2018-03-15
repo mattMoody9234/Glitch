@@ -8,18 +8,17 @@ public class CameraMovement : MonoBehaviour {
     float x;
     float y;
     float z;
-    float prevMousePosX;
-    float prevMousePosY;
+
     // Use this for initialization
     void Start () {
         x = player.transform.position.x;
         y = player.transform.position.y + .1f;
         z = player.transform.position.z + .1f;
         transform.Translate(x, y, z);
-        prevMousePosX = Input.mousePosition.x;
-        prevMousePosY = Input.mousePosition.y;
+  
     }
 
+    
     void LateUpdate()
     {
         x = player.transform.position.x;
@@ -30,7 +29,6 @@ public class CameraMovement : MonoBehaviour {
         newPos.y = y;
         newPos.z = z;
         transform.position = newPos;
-
 
 
     }
