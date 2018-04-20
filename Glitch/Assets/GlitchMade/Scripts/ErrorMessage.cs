@@ -8,10 +8,10 @@ public class ErrorMessage : MonoBehaviour {
     public Text errorMessage;
 
     public BugsScript gameManager;
-
+    Rigidbody playerRigid;
     // Use this for initialization
     void Start () {
-       
+        playerRigid = gameManager.player.GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
@@ -29,5 +29,6 @@ public class ErrorMessage : MonoBehaviour {
     {
         gameManager.player.transform.position = gameManager.playerPos;
         gameManager.isFall = false;
+        playerRigid.velocity = new Vector3(0, 0, 0);
     }
 }
