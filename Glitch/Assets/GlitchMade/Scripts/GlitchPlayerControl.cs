@@ -17,7 +17,7 @@ public class GlitchPlayerControl : MonoBehaviour
 
     bool rotate;
 
-    bool rotatingCharacter;
+
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -27,7 +27,7 @@ public class GlitchPlayerControl : MonoBehaviour
         isJumping = false;
 
         rotate = false;
-        rotatingCharacter = false;
+        
 
     }
 
@@ -85,7 +85,7 @@ public class GlitchPlayerControl : MonoBehaviour
         {
             rotate = true;
             prevMousePosY = Input.mousePosition.y;
-            Debug.Log("Down");
+         
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -118,7 +118,7 @@ public class GlitchPlayerControl : MonoBehaviour
 
                 transform.Rotate(rotateMe * Time.deltaTime * 100.0f);
 
-                Debug.Log("rotateing");
+               
             }
 
             
