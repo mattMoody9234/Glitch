@@ -3,7 +3,7 @@ using System.Collections;
 using System.Runtime.InteropServices;
 
 
-	
+
 public class GlitchPlayerControl : MonoBehaviour
 {
     Rigidbody rb;
@@ -17,6 +17,7 @@ public class GlitchPlayerControl : MonoBehaviour
 
     bool rotate;
 
+    bool rotatingCharacter;
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -25,8 +26,9 @@ public class GlitchPlayerControl : MonoBehaviour
         isVMoving = false;
         isJumping = false;
 
-        prevMousePosY = Input.mousePosition.y;
         rotate = false;
+        rotatingCharacter = false;
+
     }
 
 
@@ -35,7 +37,7 @@ public class GlitchPlayerControl : MonoBehaviour
         //get buttons down
         if (Input.GetButtonDown("Horizontal"))
         {
-            isHMoving = true; 
+            isHMoving = true;
             animator.SetBool("Move", true);
         }
         if (Input.GetButtonDown("Vertical"))
@@ -47,8 +49,8 @@ public class GlitchPlayerControl : MonoBehaviour
         {
             isJumping = true;
             animator.SetTrigger("Jump");
-           // rb.AddForce(transform.up +* 1300 .0f);
-            transform.Translate(0, Input.GetAxis("Vertical")  + 2.0f,0.0f);
+            // rb.AddForce(transform.up +* 1300 .0f);
+            transform.Translate(0, Input.GetAxis("Vertical") + 2.0f, 0.0f);
         }
 
         //get buttons up
@@ -71,7 +73,7 @@ public class GlitchPlayerControl : MonoBehaviour
         //move left or right
         if (isHMoving == true)
         {
-            transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * 10.0f,0,0);
+            transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * 10.0f, 0, 0);
         }
         //move forward or backward
         if (isVMoving == true)
@@ -82,19 +84,47 @@ public class GlitchPlayerControl : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             rotate = true;
+            prevMousePosY = Input.mousePosition.y;
             Debug.Log("Down");
         }
         if (Input.GetMouseButtonUp(0))
         {
             rotate = false;
         }
-        //  if (transform.rotation.y >= 90.0f && transform.rotation.y <= 180.0f)
-        //  {
-        float rotY = Input.mousePosition.y - prevMousePosY;
-        Vector3 rotateMe = new Vector3(0.0f, rotY, 0.0f);
-        //transform.Rotate(rotateMe);
-        prevMousePosY = Input.mousePosition.y;
-        rb.velocity = new Vector3(0, 0, 0);
+
+        //trying to figure out a solid rotating thing
+        if (rotate)
+        {
+
+            // float xRot =  Input.mousePosition.x - prevMousePosX;
+            if ((Input.mousePosition.x < prevMousePosY + 1.0f) && (Input.mousePosition.x > prevMousePosY - 1.0f))
+            {
+
+            }
+            else
+            {
+                Vector3 rotateMe;
+
+                if ((prevMousePosY - Input.mousePosition.x) > 0)
+                {
+                    rotateMe = new Vector3(0.0f, -1.0f, 0.0f);
+
+                }
+                else
+                {
+                    rotateMe = new Vector3(0.0f, 1.0f, 0.0f);
+
+                }
+
+                transform.Rotate(rotateMe * Time.deltaTime * 100.0f);
+
+                Debug.Log("rotateing");
+            }
+
+            
+
+            prevMousePosY = Input.mousePosition.x;
+        }
     }
     void LateUpdate()
     {

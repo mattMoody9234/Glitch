@@ -11,7 +11,7 @@ public class CameraMovement : MonoBehaviour {
     float yaw;
     float pitch;
 
-    bool rotate;
+    bool cursorRotate;
     Vector3 newPos;
     // Use this for initialization
     void Start () {
@@ -24,27 +24,27 @@ public class CameraMovement : MonoBehaviour {
         y = player.transform.position.y + 3.0f;
         z = player.transform.position.z - 2.0f;
 
-        yaw = 0.0f;
-        pitch = 0.0f;
+        yaw = transform.localEulerAngles.y;
+        pitch = transform.localEulerAngles.x;
 
-        rotate = false;
+        cursorRotate = false;
     }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            rotate = true;
+            cursorRotate = true;
         }
         if (Input.GetMouseButtonUp(0))
         {
-            rotate = false;
+            cursorRotate = false;
         }
-        if (rotate == true/* && transform.rotation.y >= 90.0f && transform.rotation.y <= 180.0f*/)
+        if (cursorRotate == true && transform.rotation.y >= 90.0f && transform.rotation.y <= 180.0f)
         {
             yaw += Input.GetAxis("Mouse X");
             pitch -= Input.GetAxis("Mouse Y");
-            transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+            transform.localEulerAngles = new Vector3(pitch, yaw, transform.localEulerAngles.z);
         }
         transform.LookAt(newPos);
         //transform.Translate(Vector3.right * Time.deltaTime);
@@ -54,6 +54,7 @@ public class CameraMovement : MonoBehaviour {
         x = player.transform.position.x;
         y = player.transform.position.y + 3.0f;
         z = player.transform.position.z - 2.0f;
+     
         //reset position behind character
 
         newPos.x = x;
