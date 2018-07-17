@@ -34,6 +34,7 @@ public class GlitchPlayerControl : MonoBehaviour
 
     void Update()
     {
+        rb.velocity = new Vector3(0, 0, 0);
         //get buttons down
         if (Input.GetButtonDown("Horizontal"))
         {
